@@ -1,11 +1,10 @@
 package hu.henko.async.data
-
 import javax.persistence.Entity
-import javax.persistence.Id
 
 @Entity
 data class Item(
-    @Id
+    @javax.persistence.Id
+    @org.springframework.data.annotation.Id
     val id: String,
     val name: String
 )

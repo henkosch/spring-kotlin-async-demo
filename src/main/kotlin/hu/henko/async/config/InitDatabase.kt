@@ -2,12 +2,12 @@ package hu.henko.async.config
 
 import hu.henko.async.data.DatabaseItemRepository
 import hu.henko.async.data.Item
-import hu.henko.async.data.ItemRepository
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.getBean
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
+import org.springframework.data.r2dbc.core.DatabaseClient
+import org.springframework.data.r2dbc.core.await
 
 class InitDatabase : ApplicationListener<ContextRefreshedEvent> {
     private val items = listOf(
@@ -19,7 +19,14 @@ class InitDatabase : ApplicationListener<ContextRefreshedEvent> {
 
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
         runBlocking {
-            event.applicationContext.getBean<DatabaseItemRepository>().init(items.asFlow())
+            event.applicationContext
+                .getBean<DatabaseClient>()
+                .execute("CREATE TABLE IF NOT EXISTS item (id varchar PRIMARY KEY, name varchar);")
+                .await()
         }
+
+        val repository = event.applicationContext.getBean<DatabaseItemRepository>()
+        repository.deleteAll()
+        items.forEach { repository.save(it) }
     }
 }

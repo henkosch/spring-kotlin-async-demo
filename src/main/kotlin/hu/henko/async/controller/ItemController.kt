@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController
 abstract class ItemController(private val itemRepository: ItemRepository) {
     // Synchronous blocking IO
     @GetMapping("/items/sync")
-    fun dbItemsSync() = itemRepository.findAllSync()
+    fun findItems() = itemRepository.findAll()
 
     // Asynchronous non-blocking IO
     @GetMapping("/items/async")
-    suspend fun dbItemsAsync() = itemRepository.findAllAsync()
+    suspend fun findItemsAsync() = itemRepository.findAllAsync()
 
     // Asynchronous non-blocking IO with flow
     @GetMapping("/items/async-flow")
-    suspend fun dbItemsAsyncFlow() = itemRepository.findAllAsyncFlow()
+    suspend fun findItemsAsyncFlow() = itemRepository.findAllAsyncFlow()
 }

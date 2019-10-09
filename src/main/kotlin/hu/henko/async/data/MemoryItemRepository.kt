@@ -3,7 +3,9 @@ package hu.henko.async.data
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.springframework.stereotype.Repository
 
+@Repository
 class MemoryItemRepository : ItemRepository {
     private val items = listOf(
         Item("1", "This"),
@@ -12,9 +14,12 @@ class MemoryItemRepository : ItemRepository {
         Item("4", "memory")
     )
 
-    private val time = 200L
+    private val time = 100L
 
-    override fun findAllSync(): List<Item> {
+    override fun deleteAll() = Unit
+    override fun save(item: Item) = item
+
+    override fun findAll(): List<Item> {
         Thread.sleep(time)
         return items.toList()
     }
@@ -32,8 +37,4 @@ class MemoryItemRepository : ItemRepository {
             }
         }
     }
-
-    override suspend fun deleteAll() = Unit
-    override suspend fun save(item: Item) = Unit
-    override suspend fun init(items: Flow<Item>) = Unit
 }
