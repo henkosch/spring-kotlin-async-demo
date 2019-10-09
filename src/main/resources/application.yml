@@ -1,0 +1,4 @@
+spring.datasource:
+    url: jdbc:postgresql://localhost:7432/async
+    username: postgres
+    password: postgres

@@ -1,6 +1,7 @@
 package hu.henko.async.config
 
 import hu.henko.async.data.DatabaseItemRepository
+import hu.henko.async.data.MemoryItemRepository
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration
 import io.r2dbc.postgresql.PostgresqlConnectionFactory
 import org.springframework.beans.factory.getBean
@@ -12,6 +13,7 @@ import org.springframework.data.r2dbc.core.DatabaseClient
 class BeanConfiguration : ApplicationContextInitializer<GenericApplicationContext> {
     override fun initialize(context: GenericApplicationContext) = context.run {
         registerBean<DatabaseItemRepository>()
+        registerBean<MemoryItemRepository>()
         registerBean {
             PostgresqlConnectionConfiguration
                 .builder()

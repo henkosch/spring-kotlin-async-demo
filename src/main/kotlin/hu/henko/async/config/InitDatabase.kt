@@ -1,5 +1,6 @@
 package hu.henko.async.config
 
+import hu.henko.async.data.DatabaseItemRepository
 import hu.henko.async.data.Item
 import hu.henko.async.data.ItemRepository
 import kotlinx.coroutines.flow.asFlow
@@ -18,7 +19,7 @@ class InitDatabase : ApplicationListener<ContextRefreshedEvent> {
 
     override fun onApplicationEvent(event: ContextRefreshedEvent) {
         runBlocking {
-            event.applicationContext.getBean<ItemRepository>().init(items.asFlow())
+            event.applicationContext.getBean<DatabaseItemRepository>().init(items.asFlow())
         }
     }
 }
