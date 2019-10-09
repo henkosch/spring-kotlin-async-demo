@@ -31,6 +31,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${coroutinesVersion}")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.0.RC1")
+	implementation("io.r2dbc:r2dbc-pool:0.8.0.RC1")
 	implementation("org.springframework.data:spring-data-r2dbc:1.0.0.RC1")
 	implementation("io.projectreactor:reactor-core")
 
