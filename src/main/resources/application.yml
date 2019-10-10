@@ -1,17 +1,21 @@
+reactor.netty:
+    io-worker-count: 4
+    io-select-count: -1
+    max-pool-connections: -1
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:7432/async
+        url: jdbc:postgresql://10.0.219.233:5432/async
         username: postgres
         password: postgres
         hikari:
             minimum-idle: 100
-            maximum-pool-size: 500
+            maximum-pool-size: 300
             idle-timeout: 1800000
     r2dbc:
-        url: r2dbc:pool:postgresql://localhost:7432/async
+        url: r2dbc:pool:postgresql://10.0.219.233:5432/async
         username: postgres
         password: postgres
         pool:
             initial-size: 100
-            max-size: 500
+            max-size: 300
             max-idle-time: 30m
