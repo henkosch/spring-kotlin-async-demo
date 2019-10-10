@@ -3,6 +3,10 @@ spring:
         url: jdbc:postgresql://localhost:7432/async
         username: postgres
         password: postgres
+        hikari:
+            minimum-idle: 100
+            maximum-pool-size: 500
+            idle-timeout: 1800000
     r2dbc:
         url: r2dbc:pool:postgresql://localhost:7432/async
         username: postgres
@@ -11,4 +15,3 @@ spring:
             initial-size: 100
             max-size: 500
             max-idle-time: 30m
-            validation-query: SELECT 1
